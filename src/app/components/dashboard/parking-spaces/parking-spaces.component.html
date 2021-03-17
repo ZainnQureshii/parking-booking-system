@@ -1,0 +1,22 @@
+<div class="parking-spaces" *ngIf="parkingSpaces.length > 0">
+  <hr>
+  <div class="alert alert-info">Click on any slot to select, then click on "Confirm Booking" to book a parking space.</div>
+  <div class="parking-spaces-wrapper">
+    <div class="row">
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2" role="button" *ngFor="let space of parkingSpaces; let i = index">
+        <div class="space" [ngClass]="{'booked': checkIfBooked(space), 'selected': space.selected}">
+          <div class="select-space" *ngIf="!checkIfBooked(space)" (click)="selectSlot(space, i)"></div>
+          <div>{{ space.parkingSpaceTitle }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-button">
+    <button
+      class="btn btn-primary"
+      [disabled]="!selectedParkingSpace"
+      (click)="bookParkingSpace(selectedParkingSpace.parkingSpaceId)"
+      >Confirm Booking</button>
+  </div>
+</div>

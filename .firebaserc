@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "parking-booking-system-9af48": {
+      "hosting": {
+        "parking-booking-system": [
+          "parking-booking-system-9af48"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "parking-booking-system-9af48"
+  }
+}

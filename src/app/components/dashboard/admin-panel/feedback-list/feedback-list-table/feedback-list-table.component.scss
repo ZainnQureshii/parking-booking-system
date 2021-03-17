@@ -1,0 +1,20 @@
+table {
+  td,
+  th {
+    &:nth-last-child(-n + 3) {
+      width: 140px;
+    }
+    &:last-child {
+      text-align: center;
+    }
+  }
+}
+
+.modal {
+  .modal-body {
+    textarea {
+      max-height: 250px;
+      min-height: 150px;
+    }
+  }
+}

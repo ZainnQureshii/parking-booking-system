@@ -1,0 +1,17 @@
+<div *ngIf="userBookings.length > 0; else noBookings" class="bookings">
+
+  <app-bookings-table
+    [bookings]="newBookings"
+    [state]="'upcoming'"
+    (cancelBooking)="cancelBooking($event)"
+    ></app-bookings-table><br><br>
+
+  <app-bookings-table
+    [bookings]="outdatedBookings"
+    [state]="'previous'"
+    ></app-bookings-table>
+</div>
+
+<ng-template #noBookings>
+  <div class="alert alert-secondary">You haven't booked any parking space. <a style="text-decoration: underline;" [routerLink]="['/dashboard/parking-area']">Click here to book a slot.</a> </div>
+</ng-template>

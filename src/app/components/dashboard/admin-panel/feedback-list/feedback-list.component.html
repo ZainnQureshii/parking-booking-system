@@ -1,0 +1,17 @@
+<ng-container *ngIf="feedbackList.length > 0; else noFeedbacks">
+  <div class="feedback-list">
+    <app-feedback-list-table
+      [feedbackList]="pendingFeedbacks"
+      [state]="'pending'"
+      (replyToUser)="reply($event)"
+      ></app-feedback-list-table><br><br>
+    <app-feedback-list-table
+      [feedbackList]="repliedFeedbacks"
+      [state]="'replied'"
+      ></app-feedback-list-table>
+  </div>
+</ng-container>
+
+<ng-template #noFeedbacks>
+  <div class="alert alert-secondary">No user has submitted any feedback.</div>
+</ng-template>

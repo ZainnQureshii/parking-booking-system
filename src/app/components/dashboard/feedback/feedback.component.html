@@ -1,0 +1,65 @@
+<div class="submit-feedback">
+  <textarea class="form-control" rows="5" [(ngModel)]="feedbackString"></textarea><br>
+  <button class="btn btn-primary" [disabled]="!feedbackString" (click)="submitFeedback(feedbackString)">Submit</button>
+  <p></p>
+  <div class="alert alert-success" *ngIf="success">Your feedback has been submitted!</div>
+</div>
+<br><br>
+<div class="previous-feedbacks">
+  <h4>Previous Feedbacks</h4>
+  <br>
+  <ng-container *ngIf="previousFeedbacks.length > 0; else noFeedbacks">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Feedback</th>
+          <th scope="col">Date Added</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of previousFeedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.content }}</td>
+          <td>{{ functions.getDate(feedback.timestamp) }} </td>
+          <td>
+            <button
+              *ngIf="feedback.state === 'replied'"
+              (click)="reply = feedback.reply"
+              type="button" class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModalCenter">
+              View Reply
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>
+
+<ng-template #noFeedbacks>
+  <div class="alert alert-secondary">You haven't submitted any feedbacks.</div>
+</ng-template>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Reply</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ reply }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

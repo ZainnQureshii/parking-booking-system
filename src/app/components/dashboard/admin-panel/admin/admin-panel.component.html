@@ -1,0 +1,11 @@
+<div class="admin-panel">
+  <div class="menu">
+    <ul>
+      <li [routerLink]="['/dashboard/admin/all-users']" routerLinkActive="active">View Users</li>
+      <li [routerLink]="['/dashboard/admin/bookings']" routerLinkActive="active">View Bookings</li>
+      <li [routerLink]="['/dashboard/admin/feedbacks']" routerLinkActive="active">View Feedbacks</li>
+    </ul>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

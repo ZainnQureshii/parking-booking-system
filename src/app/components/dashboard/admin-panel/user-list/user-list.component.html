@@ -1,0 +1,28 @@
+<div class="user-list">
+  <ng-container *ngIf="userList.length > 0; else noUsers">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Date Registered</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.firstName + ' ' + user.lastName}}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.isAdmin ? 'Admin' : 'User' }}</td>
+          <td>{{ functions.getDate(user.timestamp) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>
+
+<ng-template #noUsers>
+  <div class="alert alert-secondary">No users have been registered yet.</div>
+</ng-template>

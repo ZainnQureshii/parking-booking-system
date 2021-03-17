@@ -1,0 +1,18 @@
+<header>
+  <div class="logo" role="button" [routerLink]="['/']">Parking Booking System</div>
+  <div class="menu-bar">
+    <ul role="button">
+      <ng-container *ngIf="authService.authenticated(); else showLogin">
+        <li class="pointer" [routerLink]="['/dashboard/admin']" routerLinkActive="active" *ngIf="userData?.isAdmin">Admin Panel</li>
+        <li [routerLink]="['/dashboard/parking-area']" routerLinkActive="active">Book A Slot</li>
+        <li [routerLink]="['/dashboard/view-bookings']" routerLinkActive="active">My Bookings</li>
+        <li [routerLink]="['/dashboard/feedback']" routerLinkActive="active">Feedback</li>
+        <li routerLink (click)="logout()">Logout</li>
+      </ng-container>
+      <ng-template #showLogin>
+        <li [routerLink]="['/auth/login']" routerLinkActive="active">Login</li>
+        <li [routerLink]="['/auth/signup']" routerLinkActive="active">Signup</li>
+      </ng-template>
+    </ul>
+  </div>
+</header>

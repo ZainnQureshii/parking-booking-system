@@ -1,0 +1,46 @@
+.parking-areas {
+  .area {
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: 2px 0 20px 2px rgb(0, 0, 0, 0.2);
+    transition: transform 300ms;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: linear-gradient(
+        to top,
+        #000 10%,
+        transparent,
+        transparent,
+        transparent,
+        transparent
+      );
+    }
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: scale(1.05);
+    }
+    &.selected {
+      outline-style: solid;
+      outline-color: darkgreen;
+    }
+    .title {
+      margin-bottom: 10px;
+      z-index: 10;
+      font-size: 30px;
+      font-weight: 500;
+      color: #fff;
+    }
+  }
+}

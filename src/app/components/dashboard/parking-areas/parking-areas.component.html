@@ -1,0 +1,19 @@
+<div class="parking-areas" *ngIf="parkingAreas && parkingAreas.length > 0">
+  <div class="row">
+    <div
+      class="col-md-4"
+      *ngFor="let area of parkingAreas; let i = index">
+        <div
+          class="area"
+          role="button"
+          (click)="selectSlot(area, i)"
+          [ngClass]="{'selected': area.selected}"
+          [ngStyle]="{'background-image': 'url('+area.imageUrl+')'}"
+          [routerLink]="['/dashboard/parking-area/'+area.id]"
+          ><div class="title">{{ area.title }}</div>
+        </div>
+    </div>
+  </div>
+  <hr>
+  <router-outlet></router-outlet>
+</div>

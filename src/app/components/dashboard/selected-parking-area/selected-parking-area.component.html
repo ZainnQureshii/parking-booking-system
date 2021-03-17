@@ -1,0 +1,57 @@
+<div class="parking-area" *ngIf="parkingArea && parkingArea.exists; else notExists">
+  <h2>{{ parkingArea.title }}</h2>
+  <br>
+  <div class="book-slot">
+    <p>Book a slot</p>
+    <form [formGroup]="formGroup">
+      <div class="input-fields row">
+        <div class="field col-sm-3">
+          <label>Select Date</label>
+          <input formControlName="date" type="date" class="form-control" [min]="minDate" />
+        </div>
+        <div class="field col-sm-3">
+          <label>Select Time</label>
+          <select formControlName="time" class="form-control">
+            <option value="">Select</option>
+            <option
+              *ngFor="let time of timeArr"
+              [value]="time.value"
+              >{{ time.time }}</option>
+          </select>
+        </div>
+        <div class="field col-sm-3">
+          <label>Select Hours</label>
+          <select formControlName="hours" class="form-control">
+            <option value="">Select</option>
+            <option
+              *ngFor="let hour of hoursArr"
+              [value]="hour.value"
+              >{{ hour.hour }}</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="error alert alert-danger" *ngIf="slotError.error">{{ slotError.msg }}</div>
+    </form>
+
+    <button class="btn btn-primary" (click)="selectSlot(formGroup)">Select Slot</button>
+  </div>
+  <br>
+  <ng-container *ngIf="showSlots">
+    <app-parking-spaces
+      [slotTimestamps]="slotTimestamps"
+      [parkingAreaId]="parkingAreaId"
+      (bookingConfirmed)="bookingConfirmed()"
+    ></app-parking-spaces>
+  </ng-container>
+
+  <div
+    *ngIf="isBookingConfirmed"
+    class="alert alert-success"
+    role="alert" aria-label="close"
+    >Your booking is confirmed! A receipt of your booking has been sent to your email address. Do not forget to check your spam folder as well.</div>
+</div>
+
+<ng-template #notExists>
+  <div class="alert alert-secondary">Parking area not found</div>
+</ng-template>

@@ -1,0 +1,25 @@
+header {
+  margin-bottom: 50px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.2);
+  .logo {
+    font-size: 25px;
+  }
+  .menu-bar {
+    ul {
+      display: flex;
+      li {
+        &.active {
+          font-weight: 500;
+          border-bottom: 1px solid darkgreen;
+        }
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

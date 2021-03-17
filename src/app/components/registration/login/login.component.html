@@ -1,0 +1,17 @@
+<div class="login">
+  <h3>Login</h3>
+  <form [formGroup]="formGroup">
+    <div class="input-fields">
+      <div class="field">
+        <label>Email</label>
+        <input formControlName="email" type="email" class="form-control" placeholder="E-mail">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input formControlName="password" type="password" class="form-control" placeholder="Password">
+      </div>
+      <div *ngIf="error.error" class="alert alert-danger">{{ error.message }}</div>
+      <button class="btn btn-primary" (click)="login(formGroup)">Login</button>
+    </div>
+  </form>
+</div>

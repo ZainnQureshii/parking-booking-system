@@ -1,0 +1,67 @@
+<h4>{{ state + ' Feedbacks' | titlecase }}</h4>
+<br>
+<ng-container *ngIf="feedbackList.length > 0; else noFeedbacks">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Feedback</th>
+        <th scope="col">Submitted By</th>
+        <th scope="col">Date Submitted</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbackList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ feedback.content }}</td>
+        <td>{{ feedback.firstName + ' ' + feedback.lastName }}</td>
+        <td>{{ functions.getDate(feedback.timestamp) }}</td>
+        <td>
+            <button
+              *ngIf="feedback.state === 'pending'"
+              (click)="selectedFeedback = feedback"
+              data-toggle="modal"
+              data-target="#exampleModalCenterpending"
+              class="btn btn-primary"
+              >Reply</button>
+            <button
+              *ngIf="feedback.state === 'replied'"
+              data-toggle="modal"
+              data-target="#exampleModalCenterreplied"
+              (click)="reply = feedback.reply"
+              class="btn btn-primary"
+              >View Reply</button></td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-template #noFeedbacks>
+  <div class="alert alert-secondary">There are no {{ state }} feedbacks.</div>
+</ng-template>
+
+
+<!-- Modal -->
+<div class="modal fade" [id]="'exampleModalCenter' + state" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Reply</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="state === 'replied'" class="modal-body">
+        {{ reply }}
+      </div>
+      <div *ngIf="state === 'pending'" class="modal-body">
+        <textarea [value]="reply" [(ngModel)]="reply" class="form-control" rows="7"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="state === 'pending'" (click)="replyToUser.emit({ selectedFeedback: selectedFeedback, message: reply })" [disabled]="!reply" type="button" class="btn btn-secondary" data-dismiss="modal">Submit Reply</button>
+        <button *ngIf="state === 'replied'" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
